@@ -1,0 +1,45 @@
+.register-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .register-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .register-table td {
+    padding: 10px;
+  }
+  
+  .register-table label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .register-table input[type="text"],
+  .register-table input[type="email"],
+  .register-table input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+  
+  .register-table button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .register-table button:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+    font-size: 14px;
+  }
+  
