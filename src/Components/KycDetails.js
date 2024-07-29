@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './KycDetails.css'; // Ensure this CSS file is imported
+
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
 
 const KycDetails = () => {
   const [kycDetails, setKycDetails] = useState(null);
@@ -19,7 +26,7 @@ const KycDetails = () => {
           setKycDetails(null);
         }
       } catch (error) {
-        setError('Failed to fetch KYC details.');
+        setError('New user? request for Kyc');
       } finally {
         setLoading(false);
       }
@@ -42,63 +49,69 @@ const KycDetails = () => {
   }
 
   return (
-    <div className="container">
-      <h2>KYC Details</h2>
-      {error ? (
-        <div>
-          <p>{error}</p>
-          <button className="btn btn-primary" onClick={handleRedirectToSubmission}>
-            Submit KYC Details
-          </button>
-        </div>
-      ) : (
-        <div>
-          {kycDetails ? (
-            <div>
-              {/* Display KYC Details */}
-              <div className="form-group">
-                <label>Name</label>
-                <p>{kycDetails.name}</p>
+    <div className="kyc-details-page">
+      <header className="header">
+        <h2>KYC Details</h2>
+      </header>
+
+      <main>
+        {error ? (
+          <div className="error-container">
+            <p>{error}</p>
+            <button className="btn btn-primary" onClick={handleRedirectToSubmission}>
+              Raise a KYC request
+            </button>
+          </div>
+        ) : (
+          <div>
+            {kycDetails ? (
+              <table className="kyc-table">
+                <tbody>
+                  <tr>
+                    <th>Name</th>
+                    <td>{kycDetails.name}</td>
+                  </tr>
+                  <tr>
+                    <th>Address</th>
+                    <td>{kycDetails.address}</td>
+                  </tr>
+                  <tr>
+                    <th>DOB</th>
+                    <td>{formatDate(kycDetails.dob)}</td>
+                  </tr>
+                  <tr>
+                    <th>Aadhar Card Number</th>
+                    <td>{kycDetails.aadharCardNumber}</td>
+                  </tr>
+                  <tr>
+                    <th>Pan Card Number</th>
+                    <td>{kycDetails.panCardNumber}</td>
+                  </tr>
+                  <tr>
+                    <th>Phone Number</th>
+                    <td>{kycDetails.phoneNumber}</td>
+                  </tr>
+                  <tr>
+                    <th>Email</th>
+                    <td>{kycDetails.email}</td>
+                  </tr>
+                  <tr>
+                    <th>Status</th>
+                    <td>{kycDetails.kycStatus}</td>
+                  </tr>
+                </tbody>
+              </table>
+            ) : (
+              <div className="no-details-container">
+                <p>You do not have KYC details submitted.</p>
+                <button className="btn btn-primary" onClick={handleRedirectToSubmission}>
+                  Submit KYC Details
+                </button>
               </div>
-              <div className="form-group">
-                <label>Address</label>
-                <p>{kycDetails.address}</p>
-              </div>
-              <div className="form-group">
-                <label>DOB</label>
-                <p>{kycDetails.dob}</p>
-              </div>
-              <div className="form-group">
-                <label>Aadhar Card Number</label>
-                <p>{kycDetails.aadharCardNumber}</p>
-              </div>
-              <div className="form-group">
-                <label>Pan Card Number</label>
-                <p>{kycDetails.panCardNumber}</p>
-              </div>
-              <div className="form-group">
-                <label>Phone Number</label>
-                <p>{kycDetails.phoneNumber}</p>
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <p>{kycDetails.email}</p>
-              </div>
-              <div className="form-group">
-                <label>Status</label>
-                <p>{kycDetails.kycStatus}</p>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <p>You do not have KYC details submitted.</p>
-              <button className="btn btn-primary" onClick={handleRedirectToSubmission}>
-                Submit KYC Details
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+            )}
+          </div>
+        )}
+      </main>
     </div>
   );
 };

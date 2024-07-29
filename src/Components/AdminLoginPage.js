@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './AdminLoginPage.css'; // Ensure this CSS file is imported
 
 const AdminLoginPage = () => {
   const [username, setUsername] = useState('');
@@ -35,33 +36,42 @@ const AdminLoginPage = () => {
 
   return (
     <div className="login-page">
-      <h1>Admin Login</h1>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>
-            Username:
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password:
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </label>
-        </div>
-        <button type="submit">Login</button>
-        {error && <p className="error">{error}</p>}
-      </form>
+      <header className="header">
+        <h1>Admin Login</h1>
+      </header>
+
+      <main>
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
+            <label>
+              Username:
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label>
+              Password:
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <button type="submit">Login</button>
+          {error && <p className="error">{error}</p>}
+        </form>
+      </main>
+
+      <footer className="footer">
+        <p>&copy; 2024 KYC Application. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

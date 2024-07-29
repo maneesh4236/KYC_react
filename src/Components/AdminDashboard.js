@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [kycDetails, setKycDetails] = useState([]);
@@ -26,18 +27,21 @@ const AdminDashboard = () => {
   }, []);
 
   const handleUpdateKycStatus = async () => {
-    try {
-      await axios.put('https://localhost:7236/api/KycApproval/update-status', {
-        userId: selectedUser.userId,
-        kycStatus: newKycStatus
-      });
-      setKycDetails(kycDetails.map(detail =>
-        detail.userId === selectedUser.userId ? { ...detail, kycStatus: newKycStatus } : detail
-      ));
-      setSelectedUser(null);
-      setNewKycStatus('');
-    } catch (error) {
-      setError('Failed to update KYC status.');
+    if (selectedUser && newKycStatus) {
+      try {
+        await axios.put('https://localhost:7236/api/KycApproval/update-status', {
+          userId: selectedUser.userId,
+          kycStatus: newKycStatus
+        });
+        // Update the local state to reflect the change
+        setKycDetails(kycDetails.map(detail =>
+          detail.userId === selectedUser.userId ? { ...detail, kycStatus: newKycStatus } : detail
+        ));
+        setSelectedUser(null);
+        setNewKycStatus('');
+      } catch (error) {
+        setError('Failed to update KYC status.');
+      }
     }
   };
 
@@ -52,7 +56,7 @@ const AdminDashboard = () => {
   return (
     <div className="container">
       <h2>Admin Dashboard</h2>
-      <table className="table table-bordered">
+      <table className="table">
         <thead>
           <tr>
             <th>ID</th>
@@ -82,12 +86,13 @@ const AdminDashboard = () => {
               <td>
                 {selectedUser && selectedUser.userId === detail.userId ? (
                   <div>
-                    <input
-                      type="text"
+                    <select
                       value={newKycStatus}
                       onChange={e => setNewKycStatus(e.target.value)}
-                      placeholder="Enter new KYC status"
-                    />
+                    > <option value="">None</option>
+                      <option value="Approved">Approved</option>
+                      <option value="Rejected">Rejected</option>
+                    </select>
                     <button className="btn btn-success" onClick={handleUpdateKycStatus}>
                       Update
                     </button>
@@ -99,7 +104,7 @@ const AdminDashboard = () => {
                   <div>
                     {detail.kycStatus}
                     <button
-                      className="btn btn-info"
+                      className="update_button btn btn-info"
                       onClick={() => {
                         setSelectedUser(detail);
                         setNewKycStatus(detail.kycStatus);

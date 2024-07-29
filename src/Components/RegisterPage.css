@@ -1,45 +1,98 @@
 .register-page {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  background-color: #6a1b9a; /* Violet color */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+.header h1 {
+  margin: 0;
+}
+
+main {
+  padding: 20px;
+}
+
+.role-selection {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.role-selection label {
+  display: flex;
+  align-items: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #6a1b9a; /* Violet color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #5a1a8a; /* Slightly darker violet */
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.footer {
+  background-color: #6a1b9a; /* Violet color */
+  color: white;
+  text-align: center;
+  padding: 10px;
+  border-radius: 0 0 8px 8px;
+}
+
+@media (max-width: 600px) {
+  .role-selection {
+    flex-direction: column;
+    align-items: flex-start;
   }
   
-  .register-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .register-table td {
-    padding: 10px;
-  }
-  
-  .register-table label {
-    display: block;
+  .role-selection label {
     margin-bottom: 10px;
   }
   
-  .register-table input[type="text"],
-  .register-table input[type="email"],
-  .register-table input[type="password"] {
+  button {
     width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
   }
-  
-  .register-table button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .register-table button:hover {
-    background-color: #45a049;
-  }
-  
-  .error {
-    color: red;
-    font-size: 14px;
-  }
-  
+}

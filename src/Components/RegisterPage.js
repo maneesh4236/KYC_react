@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
- // Import the CSS file for styling
-
-
+import './RegisterPage.css'; // Ensure this CSS file is imported
 
 const RegisterPage = () => {
   const [role, setRole] = useState('Customer'); // Default role is 'Customer'
@@ -42,101 +40,84 @@ const RegisterPage = () => {
 
   return (
     <div className="register-page">
-      <h1>Register</h1>
-      <form onSubmit={handleRegister}>
-        <table className="register-table">
-          <tbody>
-            <tr>
-              <td>
-                <label>
-                  <input
-                    type="radio"
-                    value="Customer"
-                    checked={role === 'Customer'}
-                    onChange={() => setRole('Customer')}
-                  />
-                  Customer Sign Up
-                </label>
-              </td>
-              <td>
-                <label>
-                  <input
-                    type="radio"
-                    value="Admin"
-                    checked={role === 'Admin'}
-                    onChange={() => setRole('Admin')}
-                  />
-                  Admin Sign Up
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>
-                  Username:
-                  <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>
-                  Email:
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>
-                  Password:
-                  <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <label>
-                  Confirm Password:
-                  <input
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                </label>
-              </td>
-            </tr>
-            <tr>
-              <td colSpan="2">
-                <button type="submit">Register</button>
-              </td>
-            </tr>
-            {error && (
-              <tr>
-                <td colSpan="2">
-                  <p className="error">{error}</p>
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </form>
+      <header className="header">
+        <h1>KYC Registration</h1>
+      </header>
+      
+      <main>
+        <form onSubmit={handleRegister}>
+          <div className="role-selection">
+            <label>
+              <input
+                type="radio"
+                value="Customer"
+                checked={role === 'Customer'}
+                onChange={() => setRole('Customer')}
+              />
+              Customer Sign Up
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="Admin"
+                checked={role === 'Admin'}
+                onChange={() => setRole('Admin')}
+              />
+              Admin Sign Up
+            </label>
+          </div>
+          <div className="form-group">
+            <label>
+              Username:
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label>
+              Email:
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label>
+              Password:
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className="form-group">
+            <label>
+              Confirm Password:
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <button type="submit">Register</button>
+          {error && <p className="error">{error}</p>}
+        </form>
+      </main>
+
+      <footer className="footer">
+        <p>&copy; 2024 KYC Application. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

@@ -1,0 +1,117 @@
+/* AdminDashboard.css */
+.container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  .update_button{
+    width: 130px;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  .table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .table .btn {
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 2px;
+    cursor: pointer;
+  }
+  
+  .table .btn-success {
+    background-color: #7f00ff; /* Violet color */
+  }
+  
+  .table .btn-info {
+    background-color: #7f00ff; /* Violet color */
+  }
+  
+  .table .btn-secondary {
+    background-color: #d3d3d3;
+    color: #000;
+  }
+  
+  .table select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    width: 120px;
+    text-align: center;
+  }
+  
+  .table input[type="text"] {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 100%;
+  }
+  
+  .table div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  
+  .table .error {
+    color: red;
+    text-align: center;
+    margin: 10px 0;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .table th, .table td {
+      padding: 8px;
+      font-size: 12px;
+    }
+  
+    .table select, .table input[type="text"] {
+      width: 100%;
+    }
+  
+    .table .btn {
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+  }
+  
