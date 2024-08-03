@@ -54,7 +54,7 @@ const KycDetails = () => {
         <h2>KYC Details</h2>
       </header>
 
-      <main>
+      <main> 
         {error ? (
           <div className="error-container">
             <p>{error}</p>

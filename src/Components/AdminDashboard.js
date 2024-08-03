@@ -33,7 +33,6 @@ const AdminDashboard = () => {
           userId: selectedUser.userId,
           kycStatus: newKycStatus
         });
-        // Update the local state to reflect the change
         setKycDetails(kycDetails.map(detail =>
           detail.userId === selectedUser.userId ? { ...detail, kycStatus: newKycStatus } : detail
         ));
@@ -69,6 +68,7 @@ const AdminDashboard = () => {
             <th>Phone Number</th>
             <th>Email</th>
             <th>KYC Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -114,6 +114,14 @@ const AdminDashboard = () => {
                     </button>
                   </div>
                 )}
+              </td>
+              <td>
+                <button
+                  className="btn btn-warning"
+                  onClick={() => navigate(`/edit-customer/${detail.userId}`)}
+                >
+                  Edit Details
+                </button>
               </td>
             </tr>
           ))}

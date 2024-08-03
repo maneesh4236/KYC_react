@@ -15,11 +15,62 @@ const KycSubmission = () => {
     kycStatus: ''
   });
   const [error, setError] = useState('');
+  const [aadharError, setAadharError] = useState('');
+  const [panError, setPanError] = useState('');
   const navigate = useNavigate();
   const userId = localStorage.getItem('UserId');
 
+  // Format Aadhar Card number with dashes
+  const formatAadharCardNumber = (value) => {
+    const cleanedValue = value.replace(/\D/g, ''); // Remove all non-numeric characters
+    let formattedValue = '';
+
+    for (let i = 0; i < cleanedValue.length; i++) {
+      if (i > 0 && i % 4 === 0) {
+        formattedValue += '-';
+      }
+      formattedValue += cleanedValue[i];
+    }
+
+    return formattedValue;
+  };
+
+  // Validate Aadhar Card
+  const validateAadharCard = (value) => {
+    const aadharRegex = /^(\d{4}-){3}\d{4}$/;
+    return aadharRegex.test(value);
+  };
+
+  // Validate PAN Card
+  const validatePanCard = (value) => {
+    const panRegex = /^[A-Z]{5}\d{4}[A-Z]{1}$/;
+    return panRegex.test(value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let isValid = true;
+
+    // Validate Aadhar Card
+    if (!validateAadharCard(newKyc.aadharCardNumber)) {
+      setAadharError('Invalid Aadhar Card Number.');
+      isValid = false;
+    } else {
+      setAadharError('');
+    }
+
+    // Validate PAN Card
+    if (!validatePanCard(newKyc.panCardNumber)) {
+      setPanError('Invalid PAN Card Number.');
+      isValid = false;
+    } else {
+      setPanError('');
+    }
+
+    if (!isValid) {
+      return;
+    }
+
     try {
       await axios.post('https://localhost:7236/api/KycDetails/submit', { ...newKyc, UserId: userId });
       alert('KYC details submitted successfully!');
@@ -70,10 +121,12 @@ const KycSubmission = () => {
             <input
               type="text"
               className="form-control"
-              value={newKyc.aadharCardNumber}
+              value={formatAadharCardNumber(newKyc.aadharCardNumber)}
               onChange={(e) => setNewKyc({ ...newKyc, aadharCardNumber: e.target.value })}
+              maxLength="19" // 16 digits + 3 dashes
               required
             />
+            {aadharError && <p className="error">{aadharError}</p>}
           </div>
           <div className="form-group">
             <label>Pan Card Number</label>
@@ -84,6 +137,7 @@ const KycSubmission = () => {
               onChange={(e) => setNewKyc({ ...newKyc, panCardNumber: e.target.value })}
               required
             />
+            {panError && <p className="error">{panError}</p>}
           </div>
           <div className="form-group">
             <label>Phone Number</label>

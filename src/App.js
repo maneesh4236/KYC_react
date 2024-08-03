@@ -8,6 +8,7 @@ import KycSubmission from './Components/KycSubmission.js';
 import AdminDashboard from './Components/AdminDashboard';
 import DefaultPage from './Components/DefaultPage';
 import AdminLoginPage from './Components/AdminLoginPage';
+import  EditCustomerDetails from './Components/EditCustomerDetails';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/kyc-details/:userId" element={<KycDetails />} />
             <Route path="/submit-kyc" element={<KycSubmission />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/edit-customer/:id" element={<EditCustomerDetails />} />
           </Routes>
         </main>
       </div>
