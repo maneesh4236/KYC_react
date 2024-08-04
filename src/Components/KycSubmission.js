@@ -17,6 +17,7 @@ const KycSubmission = () => {
   const [error, setError] = useState('');
   const [aadharError, setAadharError] = useState('');
   const [panError, setPanError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
   const navigate = useNavigate();
   const userId = localStorage.getItem('UserId');
 
@@ -26,7 +27,7 @@ const KycSubmission = () => {
     let formattedValue = '';
 
     for (let i = 0; i < cleanedValue.length; i++) {
-      if (i > 0 && i % 4 === 0) {
+      if (i > 0 && i % 4 === 0 && i < 12) {
         formattedValue += '-';
       }
       formattedValue += cleanedValue[i];
@@ -37,8 +38,8 @@ const KycSubmission = () => {
 
   // Validate Aadhar Card
   const validateAadharCard = (value) => {
-    const aadharRegex = /^(\d{4}-){3}\d{4}$/;
-    return aadharRegex.test(value);
+    const cleanedValue = value.replace(/\D/g, ''); // Remove all non-numeric characters
+    return cleanedValue.length === 12;
   };
 
   // Validate PAN Card
@@ -47,13 +48,19 @@ const KycSubmission = () => {
     return panRegex.test(value);
   };
 
+  // Validate Phone Number
+  const validatePhoneNumber = (value) => {
+    const phoneRegex = /^\d{10}$/;
+    return phoneRegex.test(value);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     let isValid = true;
 
     // Validate Aadhar Card
     if (!validateAadharCard(newKyc.aadharCardNumber)) {
-      setAadharError('Invalid Aadhar Card Number.');
+      setAadharError('Invalid Aadhar Card Number. It should be 12 digits long.');
       isValid = false;
     } else {
       setAadharError('');
@@ -65,6 +72,14 @@ const KycSubmission = () => {
       isValid = false;
     } else {
       setPanError('');
+    }
+
+    // Validate Phone Number
+    if (!validatePhoneNumber(newKyc.phoneNumber)) {
+      setPhoneError('Invalid Phone Number. It should be 10 digits long.');
+      isValid = false;
+    } else {
+      setPhoneError('');
     }
 
     if (!isValid) {
@@ -122,8 +137,8 @@ const KycSubmission = () => {
               type="text"
               className="form-control"
               value={formatAadharCardNumber(newKyc.aadharCardNumber)}
-              onChange={(e) => setNewKyc({ ...newKyc, aadharCardNumber: e.target.value })}
-              maxLength="19" // 16 digits + 3 dashes
+              onChange={(e) => setNewKyc({ ...newKyc, aadharCardNumber: formatAadharCardNumber(e.target.value) })}
+              maxLength="16" // 12 digits + 3 dashes
               required
             />
             {aadharError && <p className="error">{aadharError}</p>}
@@ -146,8 +161,10 @@ const KycSubmission = () => {
               className="form-control"
               value={newKyc.phoneNumber}
               onChange={(e) => setNewKyc({ ...newKyc, phoneNumber: e.target.value })}
+              maxLength="10"
               required
             />
+            {phoneError && <p className="error">{phoneError}</p>}
           </div>
           <div className="form-group">
             <label>Email</label>
