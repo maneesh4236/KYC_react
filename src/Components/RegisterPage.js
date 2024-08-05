@@ -12,8 +12,31 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const validatePassword = (password) => {
+    const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
+    const uppercaseRegex = /[A-Z]/;
+    const numberRegex = /[0-9]/;
+
+    if (!specialCharacterRegex.test(password)) {
+      return 'Password must contain at least one special character';
+    }
+    if (!uppercaseRegex.test(password)) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    if (!numberRegex.test(password)) {
+      return 'Password must contain at least one number';
+    }
+    return null;
+  };
+
   const handleRegister = async (e) => {
     e.preventDefault();
+
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError('Passwords do not match');
