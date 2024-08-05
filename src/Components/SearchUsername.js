@@ -11,12 +11,13 @@ const SearchUsername = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://localhost:7236/api/User/check-username', { Username: username });
+      const response = await axios.get('https://localhost:7236/api/User/check-username', { params: { username } });
 
       if (response.status === 200 && response.data.exists) {
         setMessage('Username found. Please proceed to reset your password.');
-        // Navigate to the password reset page or show further instructions
-        // navigate('/reset-password'); // Uncomment and implement the reset password page if needed
+        setTimeout(() => {
+          navigate(`/add-new-password?username=${username}`);
+        }, 2000); // Navigate after 2 seconds
       } else {
         setMessage('Username not found. Please check your input.');
       }
