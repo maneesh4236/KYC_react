@@ -71,4 +71,59 @@
     padding: 10px;
     border-radius: 0 0 8px 8px;
   }
+  .login-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f0f2f5;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 300px;
+    padding: 8px;
+    font-size: 16px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  
+  .footer {
+    margin-top: 20px;
+    text-align: center;
+  }
   

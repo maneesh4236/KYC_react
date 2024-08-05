@@ -9,6 +9,7 @@ import AdminDashboard from './Components/AdminDashboard';
 import DefaultPage from './Components/DefaultPage';
 import AdminLoginPage from './Components/AdminLoginPage';
 import  EditCustomerDetails from './Components/EditCustomerDetails';
+import SearchUsername from './Components/SearchUsername.js';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
             <Route path="/submit-kyc" element={<KycSubmission />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/edit-customer/:id" element={<EditCustomerDetails />} />
+            
+            <Route path="/search-username" element={<SearchUsername />} />
           </Routes>
         </main>
       </div>

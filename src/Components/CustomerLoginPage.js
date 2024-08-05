@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './CustomerLoginPage.css'; // Ensure this CSS file is imported
+import { useNavigate, Link } from 'react-router-dom';
+import './CustomerLoginPage.css';
 
 const CustomerLoginPage = () => {
   const [username, setUsername] = useState('');
@@ -67,6 +67,7 @@ const CustomerLoginPage = () => {
           <button type="submit">Login</button>
           {error && <p className="error">{error}</p>}
         </form>
+        <Link to="/search-username">Forget Password?</Link>
       </main>
 
       <footer className="footer">

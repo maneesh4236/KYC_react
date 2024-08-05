@@ -114,4 +114,37 @@
       font-size: 12px;
     }
   }
+  .container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table th,
+  .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .table th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+  }
+  
+  .table td {
+    text-align: center;
+  }
+  
+  .update_button {
+    margin-left: 10px;
+  }
   

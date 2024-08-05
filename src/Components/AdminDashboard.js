@@ -31,16 +31,26 @@ const AdminDashboard = () => {
       try {
         await axios.put('https://localhost:7236/api/KycApproval/update-status', {
           userId: selectedUser.userId,
-          kycStatus: newKycStatus
+          kycStatus: newKycStatus,
         });
-        setKycDetails(kycDetails.map(detail =>
-          detail.userId === selectedUser.userId ? { ...detail, kycStatus: newKycStatus } : detail
-        ));
+        setKycDetails(
+          kycDetails.map((detail) =>
+            detail.userId === selectedUser.userId ? { ...detail, kycStatus: newKycStatus } : detail
+          )
+        );
         setSelectedUser(null);
         setNewKycStatus('');
       } catch (error) {
         setError('Failed to update KYC status.');
       }
+    }
+  };
+  const handleDeleteKycDetails = async (userId) => {
+    try {
+      await axios.delete(`https://localhost:7236/api/KycDetails/delete/${userId}`);
+      setKycDetails(kycDetails.filter((detail) => detail.userId !== userId));
+    } catch (error) {
+      setError('Failed to delete KYC details.');
     }
   };
 
@@ -72,7 +82,7 @@ const AdminDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          {kycDetails.map(detail => (
+          {kycDetails.map((detail) => (
             <tr key={detail.id}>
               <td>{detail.id}</td>
               <td>{detail.userId}</td>
@@ -86,10 +96,8 @@ const AdminDashboard = () => {
               <td>
                 {selectedUser && selectedUser.userId === detail.userId ? (
                   <div>
-                    <select
-                      value={newKycStatus}
-                      onChange={e => setNewKycStatus(e.target.value)}
-                    > <option value="">None</option>
+                    <select value={newKycStatus} onChange={(e) => setNewKycStatus(e.target.value)}>
+                      <option value="">None</option>
                       <option value="Approved">Approved</option>
                       <option value="Rejected">Rejected</option>
                     </select>
@@ -121,6 +129,12 @@ const AdminDashboard = () => {
                   onClick={() => navigate(`/edit-customer/${detail.userId}`)}
                 >
                   Edit Details
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => handleDeleteKycDetails(detail.userId)}
+                >
+                  Delete
                 </button>
               </td>
             </tr>
